@@ -277,58 +277,14 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public Student[] getByBirthDate(Date date) throws IllegalArgumentException {
 		// Add your implementation here
-		int c=0;
-		if(date==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		Student st[]=new Student[students.length];
-		Student st2[]=new Student[students.length];
-		for(int i=0;i<students.length;i++)
-		{
-			
-			if((students[i].getBirthDate()).before(date)||(students[i].getBirthDate().compareTo(date)==0))
-			{
-				st[i]=students[i];
-				c++;
-			}
-			
-		}
-		Arrays.copyOf(st2,st.length-c);
-		for(int i=0;i<st2.length;i++)
-		{
-			st2[i]=st[i];
-		}
 		
-		return st2;
+		return null;
 	}
 
 	@Override
 	public Student[] getBetweenBirthDates(Date firstDate, Date lastDate) throws IllegalArgumentException {
-		int c=0;
-		if(firstDate==null || lastDate==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		Student st[]=new Student[students.length];
-		Student st2[]=new Student[students.length];
-		for(int i=0;i<students.length;i++)
-		{
-			
-			if((students[i].getBirthDate()).before(lastDate) && (students[i].getBirthDate()).after(firstDate))
-			{
-				st[i]=students[i];
-				c++;
-			}
-			
-		}
-		Arrays.copyOf(st2,st.length-c);
-		for(int i=0;i<st2.length;i++)
-		{
-			st2[i]=st[i];
-		}
 		
-		return st2;
+		return null;
 		
 	}
 
