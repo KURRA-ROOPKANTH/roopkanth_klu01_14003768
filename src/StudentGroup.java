@@ -94,7 +94,7 @@ public class StudentGroup implements StudentArrayOperation {
 			throw new IllegalArgumentException();
 		}
 		 Arrays.copyOf(students,students.length+1);
-		 students[students.length]=student;
+		 students[students.length-1]=student;
 		
 	}
 
@@ -134,12 +134,23 @@ public class StudentGroup implements StudentArrayOperation {
 		}
 		Student st[]=new Student[students.length-1];
 		students[index]=null;
+		int c=0;
 		for(int i=0;i<students.length;i++)
 		{
-			if(students[i]!=null)
+			if(students[i]==null)
 			{
-				st[i]=students[i];
+				break;
 			}
+			else{
+				c++;
+			}
+		}
+		for(int i=c;i<students.length&&i+1<students.length;i++){
+		        students[i]=students[i+1];
+		}
+		students[length-1]=null;
+		for(int i=0;students[i]!=null;i++){
+		st[i]=students[i];
 		}
 		Arrays.copyOf(students,students.length-1);
 		for( int i=0;i<st.length;i++)
