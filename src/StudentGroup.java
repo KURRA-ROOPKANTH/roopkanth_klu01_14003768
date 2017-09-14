@@ -164,10 +164,7 @@ public class StudentGroup implements StudentArrayOperation {
 		i++;
 		}
 		Arrays.copyOf(students,students.length-1);
-		for(i=0;i<st.length;i++)
-		 {
-			 students[i]=st[i];
-		 }
+		
 		
 		
 		
