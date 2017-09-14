@@ -1,355 +1,262 @@
+
+import java.util.Date;
 import java.util.*;
+/**
+ * A fix-sized array of students
+ * array length should always be equal to the number of stored elements
+ * after the element was removed the size of the array should be equal to the number of stored elements
+ * after the element was added the size of the array should be equal to the number of stored elements
+ * null elements are not allowed to be stored in the array
+ * 
+ * You may add new methods, fields to this class, but DO NOT RENAME any given class, interface or method
+ * DO NOT PUT any classes into packages
+ *
+ */
 public class StudentGroup implements StudentArrayOperation {
 
 	private Student[] students;
-	
-	
+int i,len=0;	
+	LinkedList<Student> list=new LinkedList<Student>();
 	public StudentGroup(int length) {
 		this.students = new Student[length];
-	}
-
-	@Override
-	public Student[] getStudents() {
-		return students;
-		
-	}
-
-	@Override
-	public void setStudents(Student[] students) throws IllegalArgumentException  {
-		if (students==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		this.students=students;
-		
-	}
-
-	@Override
-	public Student getStudent(int index) throws IllegalArgumentException {
-		if(index<0 || index>=students.length)
-		{
-			throw new IllegalArgumentException();
-		}
-		return students[index];
-		
-	}
-
-	@Override
-	public void setStudent(Student student, int index) throws IllegalArgumentException {
-		if(index<0 || index>=students.length || students==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		students[index]=student;
-		
-	}
-
-	@Override
-	public void addFirst(Student student) throws IllegalArgumentException {
-		if (students==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		
-		Student st[]=new Student[students.length+1];
-		for(int i=1;i<st.length;i++)
-		{
-			st[i]=students[i-1];
-		}
-		st[0]=student;
-		
-		 Arrays.copyOf(students,students.length+1);
-		 for(int i=0;i<st.length;i++)
-		 {
-			 students[i]=st[i];
-		 }
-		
-		
-		
-		
-	}
-
-	@Override
-	public void addLast(Student student) throws IllegalArgumentException {
-		if (students==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		 Arrays.copyOf(students,students.length+1);
-		 students[students.length-1]=student;
-		
-	}
-
-	@Override
-	public void add(Student student, int index) throws IllegalArgumentException {
-		int i=0;
-		
-		if(index<0 || index>=students.length || students==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		Student st[]=new Student[students.length+1];
-		for( i=0;i<index;i++)
-		{
-			st[i]=students[i];
-		}
-		st[index]=student;
-		for(i=index+1;i<st.length;i++)
-		{
-			st[i]=students[i-1];
-		}
-		
-		 Arrays.copyOf(students,students.length+1);
-		 for( i=0;i<st.length;i++)
-		 {
-			 students[i]=st[i];
-		 }
-		
-		
-	}
-
-	@Override
-	public void remove(int index) throws IllegalArgumentException {
-		if(index<0 || index>=students.length || students==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		Student st[]=new Student[students.length-1];
-		students[index]=null;
-		int i=0;
-		while(students[i]!=null){
-		st[i]=students[i];
-		i++;
-		}
-		if(students[i]==null){
-		while(i<students.length)
-		st[i]=students[i+1];
-		i++;
-		}
-		Arrays.copyOf(students,students.length-1);
-		for(  i=0;i<st.length;i++)
-		 {
-			 students[i]=st[i];
-		 }
-		
-		
-	}
-
-	@Override
-	public void remove(Student student) throws IllegalArgumentException {
-		int i=0;
-		if(student==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		
-		
-		for(i=0;i<students.length;i++)
-		{
-			if(students[i].equals(student))
-				students[i]=null;
-		}
-		if(i==students.length)
-			throw new IllegalArgumentException();
-		
-		Student st[]=new Student[students.length-1];
-		 i=0;
-		while(students[i]!=null){
-		st[i]=students[i];
-		i++;
-		}
-		if(students[i]==null){
-		while(i<students.length)
-		st[i]=students[i+1];
-		i++;
-		}
-		Arrays.copyOf(students,students.length-1);
-		
-		
-		
-		
-			
-		
-	}
-
-	@Override
-	public void removeFromIndex(int index) {
-		int c=0;
-		for(int i=index+1;i<students.length;i++)
-		{
-			students[i]=null;
-			c++;
-		}
-		Student st[]=new Student[students.length-c];
-		for(int i=0;i<students.length;i++)
-		 {
-			if(students[i]!=null)
-			{
-				st[i]=students[i];
-			}
-		 }
-		Arrays.copyOf(students,students.length-c);
-		for ( int i=0;i<st.length;i++)
-		 {
-			 students[i]=st[i];
-		 }
-		
-	}
-
-	@Override
-	public void removeFromElement(Student student) {
-		int i=0;
-        int c=0;
-        for(i=students.length;students[i]!=student;i--){
-            c++;
+	len=length;
         }
-		Student st[]=new Student[students.length-c];
-		for( i=0;i<students.length&&students[i]!=student;i++)
-		{
-			st[i]=students[i];
-		}
-		Arrays.copyOf(students,students.length-i);
-		for( i=0;i<students.length;i++){
-		students[i]=st[i];
-		}
+
+	
+	public Student[] getStudents() {
+                
+		return students;
+	}
+
+
+	public void setStudents(Student[] students) throws IllegalArgumentException {
+	
+        if(students!=null){
+           for(i=0;i<list.size();i++)list.add(students[i]);
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+	}
+
+
+	public Student getStudent(int index)  throws IllegalArgumentException{
+		if(index>=0&&index<list.size())return list.get(index);
+         else{
+            throw new IllegalArgumentException();
+        }
+	}
+
+	
+	public void setStudent(Student student, int index) throws IllegalArgumentException{
+		if(index>=0&&index<list.size())list.set(index, student);
+	else{
+            throw new IllegalArgumentException();
+        }
+        }
+
+	
+	public void addFirst(Student student) throws IllegalArgumentException{
+		list.set(0, student);
+	
+        }
+
+	
+	public void addLast(Student student) {
+	list.set((list.size()-1), student);
+	}
+
+
+	public void add(Student student, int index)throws IllegalArgumentException {
 		
+                if(index>=0&&index<list.size())list.set(index, student);
+                  else{
+            throw new IllegalArgumentException();
+        }
+                
+               
 	}
 
-	@Override
-	public void removeToIndex(int index) {
-		// Add your implementation here
-		Student st[]=new Student[students.length-index];
-		for(int i=index;i<students.length;i++)
-		{
-			st[i]=students[i];
-		}
-		Arrays.copyOf(students,students.length-index);
-		for(int i=0;i<students.length;i++)
-		{
-			students[i]=st[i];
-		}
+	
+	public void remove(int index) throws IllegalArgumentException{
+		if(index>=0&&index<list.size())list.remove(index);
+	else{
+            throw new IllegalArgumentException();
+        }
+        }
+
+	
+	public void remove(Student student)throws IllegalArgumentException {
+	int f=0;
+            if(student!=null){
+            for(i=0;i<list.size();i++)
+            {
+                if(list.get(i)==student)
+                {
+                    list.set(i,null);
+               f=1;
+                    break;
+                }
+            }
+        }
+        if(f==0)System.out.println("Student not exist");
+        else{
+            throw new IllegalArgumentException();
+        }
+        }
+
+	
+	public void removeFromIndex(int index) throws IllegalArgumentException{
+		
+            if(index>=0&&index<list.size()){
+                  list.remove(index);
+                }
+	else{
+            throw new IllegalArgumentException();
+        }
+        }
+
+	
+	public void removeFromElement(Student student)  throws IllegalArgumentException{
+	int f=0;
+            if(student!=null){
+           for(i=0;i<list.size();i++)if(list.get(i)==student)break;
+           while(i<list.size()){
+               if(list.get(i)==student)list.set(i,null);
+               i++;
+           }
 	}
+        else{
+            throw new IllegalArgumentException();
+        }
+        }
+	
+	public void removeToIndex(int index) throws IllegalArgumentException{
+		if(index>=0&&index<list.size()){
+                    for(i=index+1;i<list.size();i++)list.set(i,null);
+                }
+	else{
+            throw new IllegalArgumentException();
+        }
+        }
 
-	@Override
-	public void removeToElement(Student student) {
-		// Add your implementation here
-		int y=0;
-		for(int i=0;i<students.length;i++)
-		{
-			if(students.equals(student))
-			{
-				y=i;break;
-			}
-		}
-		Student st[]=new Student[students.length-y];
-		for(int i=y;i<students.length;i++)
-		{
-			st[i]=students[i];
-		}
-		Arrays.copyOf(students,students.length-y);
-		for(int i=0;i<students.length;i++)
-		{
-			students[i]=st[i];
-		}
+	
+	public void removeToElement(Student student) throws IllegalArgumentException{
+		if(student!=null){
+                    for(i=0;i<list.size();i++)if(list.get(i)==student)break;
+                    while(i<list.size()){
+                        if(list.get(i)==student)list.set(i, null);
+                    }
+                }
+	else{
+            throw new IllegalArgumentException();
+        }
+        }
 
-	}
-
-	@Override
+	
 	public void bubbleSort() {
-		// Add your implementation here
-		for(int i=0;i<students.length;i++)
-		{
-			for(int j=i+1;j<students.length;j++)
-			{
-				if(students[i].compareTo(students[j])>0)
-				{
-					Object o=students[j];
-					students[i]=students[j];
-					students[j]=(Student)o;
-				}
-			}
-		}
+		int j;
+                Student temp;
+                for(i=0;i<list.size();i++){
+                    for(j=i+1;j<list.size();j++){
+                        if(list.get(i).getId()>list.get(j).getId()){
+                            temp=list.get(i);
+                            list.set(i,list.get(j));
+                            list.set(j,temp);
+                        }
+                    }
+                }
 	}
 
-	@Override
-	public Student[] getByBirthDate(Date date) throws IllegalArgumentException {
-		// Add your implementation here
-		
-		return null;
+	
+	public Student[] getByBirthDate(Date date)throws IllegalArgumentException {
+		if(date!=null){
+                    Student[] birth=new Student[list.size()];
+                
+                int j=0;
+                for(i=0;i<list.size();i++){
+                  if(date.compareTo(list.get(i).getBirthDate())<=0)birth[j++]=list.get(i);
+                    
+                }
+		return birth;
+        }
+                
+                else{
+            throw new IllegalArgumentException();
+        }
 	}
 
-	@Override
-	public Student[] getBetweenBirthDates(Date firstDate, Date lastDate) throws IllegalArgumentException {
-		
-		return null;
-		
-	}
+	
+	public Student[] getBetweenBirthDates(Date firstDate, Date lastDate) throws IllegalArgumentException{
+		Student[] birth=new Student[list.size()];
+                int j=0;
+                if(firstDate!=null&&lastDate!=null){
+                for(i=0;i<list.size();i++){
+                    if(firstDate.compareTo(list.get(i).getBirthDate())>=0&&lastDate.compareTo(list.get(i).getBirthDate())<=0)birth[j++]=list.get(i);
+                }
+		return birth;
+                }
+        
+                else{
+            throw new IllegalArgumentException();
+        }        
+        }
 
-	@Override
-	public Student[] getNearBirthDate(Date date, int days) {
-		// Add your implementation here
-		return null;
-	}
+	
+	public Student[] getNearBirthDate(Date date, int days)throws IllegalArgumentException {
+	if(date!=null){	
+            Student[] birth=new Student[list.size()];
+                int j=0;
+                for(i=0;i<list.size();i++){
+                    if(date.compareTo(list.get(i).getBirthDate())<=days)birth[j++]=list.get(i);
+                }
+		return birth;
+        }
+	
+                else{
+            throw new IllegalArgumentException();
+        }        
+        }
 
-	@Override
+	
 	public int getCurrentAgeByDate(int indexOfStudent) {
-		// Add your implementation here
-		return 0;
-	}
+            Date age=null;
+            if(indexOfStudent!=0){
+                    Date date=list.get(indexOfStudent).getBirthDate();
+                    long agein=new Date().getTime()-date.getTime();
+                 age=new Date(agein);
+                
+                }
+	return age.getYear();
+        }
 
-	@Override
+	
 	public Student[] getStudentsByAge(int age) {
-		
+		Student[] birth=new Student[list.size()];
+          
 		return null;
 	}
 
-	@Override
+	
 	public Student[] getStudentsWithMaxAvgMark() {
-		double max=0;
-		// Add your implementation here
-		for(int i=0;i<students.length;i++)
-		{
-			if(students[i].getAvgMark()>max)
-				max=students[i].getAvgMark();
-		}
-		int c=0;
-		Student st[]=new Student[students.length];
-        Student st2[]=new Student[students.length];
-		for(int i=0;i<students.length;i++)
-		{
-			if(students[i].getAvgMark()==max)
-			{
-				st[i]=students[i];
-				c++;
-			}
-		}
-		Arrays.copyOf(st2,st.length-c);
-		for(int i=0;i<st2.length;i++)
-		{
-			st2[i]=st[i];
-		}
-		
-		return st2;
-		
+	double max=-1;
+        int j=0;
+        Student[] marks=new Student[list.size()];
+              for(i=0;i<list.size();i++)if(max<list.get(i).getAvgMark())max=list.get(i).getAvgMark();
+              for(i=0;i<list.size();i++)if(max==list.get(i).getAvgMark())marks[j++]=list.get(i);
+               
+              		return marks;
 	}
 
-	@Override
-	public Student getNextStudent(Student student) throws IllegalArgumentException {
-		// Add your implementation here
-		if(student==null)
-		{
-			throw new IllegalArgumentException();
-		}
-		Student obj=null ;
-		for(int i=0;i<students.length;i++)
-		{
-			
-			if(students[i].equals(student)){
-				 obj=students[i];
-					break;
-				}
-		}
-		
-		return obj;
-	}
+	
+	public Student getNextStudent(Student student)throws IllegalArgumentException {
+		if(student!=null){
+                    for(i=0;i<list.size();i++)if(list.get(i)==student)break;
+        	return list.get(i+1);            
+                }
+	
+	else{
+            throw new IllegalArgumentException();
+        }        
+        }
 }
