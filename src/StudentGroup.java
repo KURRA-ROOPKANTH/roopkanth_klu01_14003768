@@ -148,7 +148,7 @@ public class StudentGroup implements StudentArrayOperation {
 		for(int i=c;i<students.length&&i+1<students.length;i++){
 		        students[i]=students[i+1];
 		}
-		students[length-1]=null;
+		students[students.length-1]=null;
 		for(int i=0;students[i]!=null;i++){
 		st[i]=students[i];
 		}
