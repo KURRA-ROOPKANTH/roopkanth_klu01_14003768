@@ -94,7 +94,7 @@ public class StudentGroup implements StudentArrayOperation {
 			throw new IllegalArgumentException();
 		}
 		 Arrays.copyOf(students,students.length+1);
-		 students[students.length-1]=student;
+		 students[students.length]=student;
 		
 	}
 
