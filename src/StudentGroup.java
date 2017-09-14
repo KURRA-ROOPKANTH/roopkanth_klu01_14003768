@@ -1,8 +1,4 @@
-import java.util.Arrays;
-import java.util.Date;
-
-
-
+import java.util.*;
 public class StudentGroup implements StudentArrayOperation {
 
 	private Student[] students;
@@ -157,7 +153,7 @@ public class StudentGroup implements StudentArrayOperation {
 			throw new IllegalArgumentException();
 		
 		Student st[]=new Student[students.length-1];
-		int i=0;
+		 i=0;
 		while(students[i]!=null){
 		st[i]=students[i];
 		i++;
@@ -206,13 +202,17 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void removeFromElement(Student student) {
 		int i=0;
+        int c=0;
+        for(i=students.length;students[i]!=student;i--){
+            c++;
+        }
 		Student st[]=new Student[students.length-c];
 		for( i=0;i<students.length&&students[i]!=student;i++)
 		{
 			st[i]=students[i];
 		}
 		Arrays.copyOf(students,students.length-i);
-		for(int i=0;i<n;i++){
+		for( i=0;i<students.length;i++){
 		students[i]=st[i];
 		}
 		
@@ -361,6 +361,7 @@ public class StudentGroup implements StudentArrayOperation {
 		}
 		int c=0;
 		Student st[]=new Student[students.length];
+        Student st2[]=new Student[students.length];
 		for(int i=0;i<students.length;i++)
 		{
 			if(students[i].getAvgMark()==max)
